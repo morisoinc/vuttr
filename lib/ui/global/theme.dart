@@ -11,15 +11,14 @@ ThemeData buildTheme(VTheme theme) {
   ThemeData base = ThemeData.light();
   base = base.copyWith(
     scaffoldBackgroundColor: kWhite,
+    splashColor: Colors.transparent,
     errorColor: kRed,
+    inputDecorationTheme: _kInputDecorationTheme,
+    textSelectionTheme: _kTextSelectionThemeData,
     cardTheme: _kCardMainElevation1Theme,
     textTheme: _buildTextTheme(base.textTheme),
     primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
     accentTextTheme: _buildTextTheme(base.accentTextTheme),
-    inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-    ),
   );
 
   switch (theme) {
@@ -38,11 +37,52 @@ ThemeData buildTheme(VTheme theme) {
   }
 }
 
+const _kTextSelectionThemeData = TextSelectionThemeData(
+    cursorColor: kInk,
+    selectionColor: kLightestInk,
+    selectionHandleColor: kLightInk);
+
+const _kInputDecorationTheme = InputDecorationTheme(
+  isDense: true,
+  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 22),
+  filled: true,
+  fillColor: kDarkerWhite,
+  focusColor: kDarkestWhite,
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kDarkestWhite),
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kMostDarkestWhite),
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kRed),
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kRed),
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  ),
+  errorStyle: TextStyle(
+    fontSize: 0,
+    height: 0,
+  ),
+);
+
+const _kCardMainElevation1Theme = CardTheme(
+  color: kWhite,
+  shadowColor: kCardShadow,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+  ),
+);
+
 ThemeData _buildColorDependentThemeData({
-  @required ThemeData? theme,
-  @required Color? primary,
-  @required Color? lighter,
-  @required Color? darker,
+  required ThemeData? theme,
+  required Color? primary,
+  required Color? lighter,
+  required Color? darker,
 }) {
   return theme!.copyWith(
     accentColor: primary,
@@ -87,11 +127,3 @@ TextTheme _buildTextTheme(TextTheme base) {
         bodyColor: kInk,
       );
 }
-
-final _kCardMainElevation1Theme = CardTheme(
-  color: kWhite,
-  shadowColor: kCardShadow,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-  ),
-);
