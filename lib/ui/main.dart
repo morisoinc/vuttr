@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vuttr/ui/widgets/v_alert_dialog.dart';
 import 'package:vuttr/ui/widgets/v_container.dart';
 import 'package:vuttr/ui/widgets/v_text_field.dart';
 
@@ -63,7 +64,14 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          VAlertDialog(
+            title: 'Alert dialog example',
+            content: 'Just a lil dialog',
+            continueCallBack: () => { Navigator.pop(context) },
+            context: context,
+          ).show();
+        },
       ),
     );
   }
